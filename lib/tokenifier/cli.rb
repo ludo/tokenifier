@@ -11,13 +11,28 @@ module Tokenifier
     def optparse
       OptionParser.new do |opts|
         opts.banner =<<-USAGE
-Usage: tokinifier [options] COMMAND 'custom string'
 
-       tokinifier e|encrypt "CUSTOM DATA"
-       tokinifier d|decrypt "CUSTOM DATA"
+Usage:
 
-       tokinifier --secret CUSTOMSECRET e|encrypt "CUSTOM DATA"
-       tokinifier --secret CUSTOMSECRET d|decrypt "ENCRYPTED DATA"
+        tokenifier [options] COMMAND 'custom string'
+
+Commands:
+
+        s|secret - Generates secret string
+        e|encrypt - Does data encryption of any string data
+        d|decrypt - Does data decryption from hashed data.
+
+        NOTE: You have to use permanent secret to decryption data.
+              Tokinifier generates dafult secret each execution time.
+
+Examples:
+
+        tokenifier encrypt "CUSTOM DATA"
+        tokenifier decrypt "CUSTOM DATA"
+
+        tokenifier --secret MYSECRET e "CUSTOM DATA"
+        tokenifier --secret MYSECRET d "ENCRYPTED DATA"
+
 
 USAGE
 
@@ -33,22 +48,31 @@ USAGE
     end
 
     def run
-      unless ARGV.size == 2
-        optparse.help
+      optparse.parse!
+
+      begin
+        case ARGV.first
+          when /^e/
+            if options[:secret].nil?
+              options[:secret] = Tokenifier::Random.secret
+              puts "SECRET: #{options[:secret]}"
+            end
+
+            puts Tokenifier.encrypt(ARGV.last, options)
+          when /^d/
+            puts Tokenifier.decrypt(ARGV.last, options)
+          when /^s/
+            puts Tokenifier::Random.secret
+          else
+            puts optparse.help
+            exit
+        end
+      rescue Tokenifier::Error => e
+        puts "ERROR: Token processing error."
+        puts optparse.help
         exit
       end
 
-      optparse.parse!
-
-      puts case ARGV.first
-        when /^e/
-          Tokenifier.encrypt(ARGV.last, options)
-        when /^d/
-          Tokenifier.decrypt(ARGV.last, options)
-        else
-          optparse.help
-          exit
-      end
     end
 
   end

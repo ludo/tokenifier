@@ -1,4 +1,4 @@
-require 'tokenifier/version'
+require 'lib/tokenifier/version'
 
 Gem::Specification.new do |s|
   s.name          = 'tokenifier'
@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'gibberish', '~>1.2'
   s.add_development_dependency 'rspec', '>= 2.6.0'
 
-  s.files         = Dir['lib/**/*']
+  s.files         = Dir['lib/**/*', 'bin/tokenifier', "README.md"]
   s.test_files    = Dir['spec/**/*']
-  s.executables   = [...]
+  s.executables   = ['tokenifier']
 end

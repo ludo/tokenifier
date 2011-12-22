@@ -43,14 +43,21 @@ Using custom secret
 
 Usage:
 
-    tokinifier [options] COMMAND 'custom string'
+    tokenifier [options] COMMAND 'custom string'
 
-Commands
+Commands:
 
-    tokinifier e|encrypt "CUSTOM DATA"
-    tokinifier d|decrypt "CUSTOM DATA"
+    s|secret - Generates secret string
+    e|encrypt - Does data encryption of any string data
+    d|decrypt - Does data decryption from hashed data.
 
-Using custom secret
+    NOTE: You have to use permanent secret to decryption data.
+          Tokinifier generates dafult secret each execution time.
 
-    tokinifier --secret CUSTOMSECRET e|encrypt "CUSTOM DATA"
-    tokinifier --secret CUSTOMSECRET d|decrypt "ENCRYPTED DATA"
+Examples:
+
+     tokenifier encrypt "CUSTOM DATA"
+     tokenifier decrypt "CUSTOM DATA"
+
+     tokenifier --secret MYSECRET e "CUSTOM DATA"
+     tokenifier --secret MYSECRET d "ENCRYPTED DATA"
