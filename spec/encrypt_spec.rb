@@ -40,7 +40,7 @@ describe Tokenifier::Encrypt do
 
     context "exception handing" do
       before {
-        cipher.stub(:enc).and_return(mock(:cifer, :enc => nil))
+        cipher.stub(:enc).and_return("some output")
         subject.stub(:cipher).and_yield(cipher)
       }
 
