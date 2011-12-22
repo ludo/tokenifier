@@ -12,7 +12,8 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'gibberish', '~>1.2'
   s.add_development_dependency 'rspec', '>= 2.6.0'
 
-  s.files         = Dir['lib/**/*', 'bin/tokenifier', "README.md"]
+  s.require_path  = 'lib'
+  s.files         = Dir['{lib,spec,rails_generators}/**/*', 'bin/tokenifier', "[a-zA-Z]*"]
   s.test_files    = Dir['spec/**/*']
   s.executables   = ['tokenifier']
 end

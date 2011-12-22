@@ -1,0 +1,11 @@
+Description:
+    Sets up Tokenifier in your Rails project. After running this generator you will
+    get a new config/tokenifier.yml file with newly generated secrets.
+
+    If you want to share tokens between applications use same secret strings
+    in proper environment.
+
+Examples:
+    `rails generate tokenifier:install`
+
+    `rails generate tokenifier:install --help`
