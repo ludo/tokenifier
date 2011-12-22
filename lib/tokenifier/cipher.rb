@@ -4,7 +4,7 @@ module Tokenifier
     SECRET = '897316929176464ebc9ad085f31e7284'
 
     def cipher(*args, &block)
-      aes = Gibberish::AES.new(custom_secret || SECRET)
+      aes = Gibberish::AES.new(args.first || SECRET)
       block_given? ? yield(aes) : aes
     end
 
