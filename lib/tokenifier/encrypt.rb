@@ -9,11 +9,12 @@ module Tokenifier
 
     def encrypt(data, options = {})
 
-      raise Tokenifier::Error, "DATA should not be empty" if data.blank?
+      raise Tokenifier::Error, "DATA should not be nil" if data.nil?
+      raise Tokenifier::Error, "DATA should not be empty" if data.respond_to?(:empty?) && data.empty?
 
-      # cipher(options[:secret]).do |c|
-      #   c.enc(data.is_a?(Hash) ? pack_hash(data) : data.to_s)
-      # end
+      cipher(options[:secret]) do |c|
+        c.enc(data.is_a?(Hash) ? pack_hash(data) : data.to_s)
+      end
 
     end
 

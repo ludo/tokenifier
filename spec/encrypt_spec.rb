@@ -34,4 +34,48 @@ describe Tokenifier::Encrypt do
 
   end
 
+  describe ".encrypt" do
+
+    let(:cipher) { Proc.new{|*args, &block| yield(*args) } }
+
+    context "exception handing" do
+      before {
+        cipher.stub(:enc).and_return(mock(:cifer, :enc => nil))
+        subject.stub(:cipher).and_yield(cipher)
+      }
+
+      specify { lambda { subject.encrypt(nil) }.should raise_error(Tokenifier::Error) }
+      specify { lambda { subject.encrypt("") }.should  raise_error(Tokenifier::Error) }
+      specify { lambda { subject.encrypt({}) }.should  raise_error(Tokenifier::Error) }
+      specify { lambda { subject.encrypt(123) }.should_not  raise_error }
+      specify { lambda { subject.encrypt(1.1) }.should_not  raise_error }
+      specify { lambda { subject.encrypt("1") }.should_not  raise_error }
+      specify { lambda { subject.encrypt(:a => "1") }.should_not  raise_error }
+    end
+
+    context "data types" do
+
+      before {
+        subject.should_receive(:cipher).and_yield(cipher)
+      }
+
+      context "Numeric" do
+        before { cipher.should_receive(:enc).with("1").and_return("test output = 1") }
+        specify { subject.encrypt(1).should == "test output = 1" }
+      end
+
+      context "String" do
+        before { cipher.should_receive(:enc).with("value").and_return("test output = value") }
+        specify { subject.encrypt("value").should == "test output = value" }
+      end
+
+      context "Hash" do
+        before { cipher.should_receive(:enc).with("a:1234").and_return("test output = a:1234") }
+        specify { subject.encrypt(:a => 1234).should == "test output = a:1234" }
+      end
+
+    end
+
+  end
+
 end
