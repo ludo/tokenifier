@@ -33,9 +33,11 @@ Errors handling
 
     Tokenifier.decrypt("malformed hash")  # => raises Tokenifier::Error
 
+Using custom secret
 
-
-
+    data = Tokenifier.encrypt("string", :secret => 'secret')
+    Tokenifier.decrypt(data, :secret => 'secret')               # => "string"
+    Tokenifier.decrypt(data)                                    # => raises Tokenifier::Error, "Got a malformed string"
 
 ## CLI usage
 
