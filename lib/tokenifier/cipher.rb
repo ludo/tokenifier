@@ -1,10 +1,12 @@
 module Tokenifier
   module Cipher
 
-    SECRET = '897316929176464ebc9ad085f31e7284'
+    def secret
+      @secret ||= Tokenifier::Rails.secret || Tokenifier::Random.secret
+    end
 
     def cipher(*args, &block)
-      aes = Gibberish::AES.new(args.first || SECRET)
+      aes = Gibberish::AES.new(args.first || secret)
       block_given? ? yield(aes) : aes
     end
 
