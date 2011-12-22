@@ -1,4 +1,7 @@
 #!/usr/bin/env ruby
 
+require 'rubygems'
 require 'tokinifier'
-Tokinifier::CLI.run
+require 'tokinifier/cli'
+
+Tokenifier::Cli.run

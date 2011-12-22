@@ -41,9 +41,16 @@ Using custom secret
 
 ## CLI usage
 
-To generate client token
+Usage:
 
-    tokenifier string "some-identy-string" [--secret=OPTIONAL_SECRET_STRING]
+    tokinifier [options] COMMAND 'custom string'
 
+Commands
 
+    tokinifier e|encrypt "CUSTOM DATA"
+    tokinifier d|decrypt "CUSTOM DATA"
 
+Using custom secret
+
+    tokinifier --secret CUSTOMSECRET e|encrypt "CUSTOM DATA"
+    tokinifier --secret CUSTOMSECRET d|decrypt "ENCRYPTED DATA"
