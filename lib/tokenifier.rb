@@ -1,0 +1,6 @@
+require 'gibberish'
+require 'tokenifier/error'
+require 'tokenifier/random'
+require 'tokenifier/cipher'
+require 'tokenifier/encrypt'
+require 'tokenifier/decrypt'

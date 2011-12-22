@@ -1,7 +1,7 @@
 # Tokenifier
 
-Tikenifier is a Gibberish gem wrapper.
-It provides an aproach to encrypt and decrypt structures like Strings, Hashes.
+Tokenifier is a Gibberish gem wrapper.
+It provides an approach to encrypt and decrypt structures like Strings, Hashes.
 
 ## Installation
 
@@ -13,6 +13,35 @@ Add config/tokenifier.yml in rails application
 
     development:
       secret: 7e991d82a0dd42b0afa293a339308c6f
+
+## Usage
+
+To encrypt data into hash
+
+    Tokenifier.encrypt("string")          # => 
+    Tokenifier.encrypt(:key => 'value')   # => 
+
+To decrypt data into hash
+
+    Tokenifier.decrypt(" ...")            # => 
+    Tokenifier.decrypt(" ...")            # => 
+
+Errors handling
+
+    Tokenifier.encrypt(nil)               # => raises Tokenifier::Error
+    Tokenifier.encrypt("")                # => raises Tokenifier::Error
+
+    Tokenifier.decrypt("malformed hash")  # => raises Tokenifier::Error
+
+
+
+
+
+## CLI usage
+
+To generate client token
+
+    tokenifier string "some-identy-string" [--secret=OPTIONAL_SECRET_STRING]
 
 
 
