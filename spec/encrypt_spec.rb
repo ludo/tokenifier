@@ -76,4 +76,22 @@ describe Tokenifier::Encrypt do
 
   end
 
+  describe ".key" do
+    context "should be symetric" do
+      let(:first) { subject.key(:username => 'test', :password => 'test', :salt => 'aaaabbbb') }
+      let(:second) { subject.key(:username => 'test', :password => 'test', :salt => 'aaaabbbb') }
+
+      specify { first.should == second }
+      specify { second.should == first }
+    end
+
+    context "should use delimeter" do
+      let(:first) { subject.key(:username => 'test', :password => 'test', :delimeter => '$') }
+      let(:second) { subject.key(:username => 'test', :password => 'test', :delimeter => '#') }
+
+      specify { first.should_not == second }
+      specify { second.should_not == first }
+    end
+  end
+
 end
