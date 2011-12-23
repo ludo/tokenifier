@@ -25,8 +25,4 @@ describe Tokenifier do
     specify { data.should == decrypted }
   end
 
-  context "rails support" do
-    
-  end
-
 end

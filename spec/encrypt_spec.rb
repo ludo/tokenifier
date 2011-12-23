@@ -22,14 +22,12 @@ describe Tokenifier::Encrypt do
 
     context "a few key-value pairs" do
       let(:hsh) { {:a => 2, :b => 'string 123', :c => true} }
-      let(:expected) { "c:true#a:2#b:string 123" }
+      let(:expected) { "a:2#b:string 123#c:true" }
       specify { packed.should == expected }
     end
 
     context "we are not supporting nested hashes yet due simplicity of solution" do
-      let(:hsh) { {:a => 2, :b => 'string 123', :sub => { :a => 33 } } }
-      let(:expected) { "sub:a33#a:2#b:string 123" }
-      specify { packed.should == expected }
+      pending
     end
 
   end

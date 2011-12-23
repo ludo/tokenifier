@@ -14,24 +14,24 @@ module Tokenifier
 
 Usage:
 
-        tokenifier [options] COMMAND 'custom string'
+    tokenifier [options] COMMAND 'custom string'
 
 Commands:
 
-        s|secret - Generates secret string
-        e|encrypt - Does data encryption of any string data
-        d|decrypt - Does data decryption from hashed data.
+    s|secret - Generates secret string
+    e|encrypt - Does data encryption of any string data
+    d|decrypt - Does data decryption from hashed data.
 
-        NOTE: You have to use permanent secret to decryption data.
-              Tokinifier generates dafult secret each execution time.
+    NOTE: You have to use a permanent secret to decrypt a data.
+          Tokinifier generates random secret string each execution time instead.
 
 Examples:
 
-        tokenifier encrypt "CUSTOM DATA"
-        tokenifier decrypt "CUSTOM DATA"
+     tokenifier encrypt "CUSTOM DATA"
+     tokenifier decrypt "CUSTOM DATA"
 
-        tokenifier --secret MYSECRET e "CUSTOM DATA"
-        tokenifier --secret MYSECRET d "ENCRYPTED DATA"
+     tokenifier --secret MYSECRET e "CUSTOM DATA"
+     tokenifier --secret MYSECRET d "ENCRYPTED DATA"
 
 
 USAGE

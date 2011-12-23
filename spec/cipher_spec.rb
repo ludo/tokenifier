@@ -48,4 +48,28 @@ describe Tokenifier::Cipher do
 
   end
 
+  describe ".load_rails_secret" do
+
+    let(:rails) { Class.new }
+
+    before {
+      rails.stub_chain(:root, :join).and_return(File.expand_path('../support/config/tokenifier.yml', __FILE__))
+      rails.stub_chain(:logger).and_return(mock(:logger, :warn => nil))
+      rails.stub(:env).and_return('test')
+    }
+
+    specify {
+      with_stub_const(:Rails, rails) do
+        subject.load_rails_secret.should == 'aaabbbccc'
+      end
+    }
+
+    specify {
+      without_const(:Rails) do
+        subject.load_rails_secret.should_not == 'aaabbbccc'
+      end
+    }
+
+  end
+
 end
