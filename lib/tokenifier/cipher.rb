@@ -19,8 +19,6 @@ module Tokenifier
 
       filename = Rails.root.join('config', 'tokenifier.yml')
 
-      puts filename
-
       if File.exists?(filename)
         config = YAML.load(
           ERB.new(

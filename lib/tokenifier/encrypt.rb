@@ -13,7 +13,7 @@ module Tokenifier
       raise Tokenifier::Error, "DATA should not be empty" if data.respond_to?(:empty?) && data.empty?
 
       cipher(options[:secret]) do |c|
-        c.enc(data.is_a?(Hash) ? pack_hash(data) : data.to_s)
+        c.enc(data.is_a?(Hash) ? pack_hash(data) : data.to_s).gsub(/\n/, '')
       end
 
     end
