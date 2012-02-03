@@ -26,6 +26,24 @@ describe Tokenifier::Encrypt do
       specify { packed.should == expected }
     end
 
+    context "sequence test #1" do
+      let(:hsh) { {:a => 2, :b => 1, :c => 3} }
+      let(:expected) { "a:2#b:1#c:3" }
+      specify { packed.should == expected }
+    end
+
+    context "sequence test #2" do
+      let(:hsh) { {:b => 1, :a => 2, :c => 3} }
+      let(:expected) { "a:2#b:1#c:3" }
+      specify { packed.should == expected }
+    end
+
+    context "sequence test #3" do
+      let(:hsh) { {:a => 1, :b => 2, :c => 3} }
+      let(:expected) { "a:1#b:2#c:3" }
+      specify { packed.should == expected }
+    end
+
     context "we are not supporting nested hashes yet due simplicity of solution" do
       pending
     end

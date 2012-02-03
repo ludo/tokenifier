@@ -4,7 +4,9 @@ module Tokenifier
     # data marshaling differs depending to ruby version
     # so its better to pack hash into string accoring to some rule
     def pack_hash(hsh, delimeter = '#')
-      hsh.map { |v| v.join(':') }.join(delimeter)
+      ks = hsh.keys.sort_by(&:to_s)
+      fossil = ks.map{ |k| [k,hsh[k]].join(":") }
+      fossil.join(delimeter)
     end
 
     def encrypt(data, options = {})
